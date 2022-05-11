@@ -19,7 +19,7 @@ namespace API_Address.Models
         public string taikhoan_username { get; set; }
 
         [Required]
-        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]
+        //[RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]
         public string taikhoan_password { get; set; }
 
         [RegularExpression(@"(84|0[3|5|7|8|9])+([0-9]{8})\b")]

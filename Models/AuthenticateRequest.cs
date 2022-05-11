@@ -9,9 +9,9 @@ namespace API_Address.Models
     public class AuthenticateRequest
     {
         [Required]
-        public string taikhoan_username { get; set; }
+        public string username { get; set; }
 
         [Required]
-        public string taikhoan_password { get; set; }
+        public string password { get; set; }
     }
 }

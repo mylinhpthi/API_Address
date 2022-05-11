@@ -19,7 +19,6 @@ namespace API_Address.Models
             this.khuyenmais = new HashSet<khuyenmai>();
             this.khoes = new HashSet<kho>();
         }
-
         public ObjectId Id { get; set; }
         public string id_diadiem { get; set; }
         public string diadiem_ten { get; set; }
@@ -27,6 +26,9 @@ namespace API_Address.Models
         public Nullable<double> diadiem_vido { get; set; }
         public string diadiem_url { get; set; }
         public string diadiem_mota { get; set; }
+        public DateTime diadiem_created { get; set; }
+        public DateTime diadiem_updated { get; set; }
+        public DateTime diadiem_deleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<binhluan> binhluans { get; set; }

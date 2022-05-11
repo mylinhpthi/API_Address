@@ -17,6 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Options;
+using API_Address.Services;
 
 namespace API_Address
 {
@@ -45,6 +47,25 @@ namespace API_Address
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API_Address", Version = "v1" });
+            });
+            services.AddSingleton<IDatabaseSetting>(db => db.GetRequiredService<IOptions<DatabaseSetting >> ().Value);
+            services.AddScoped<UserService>();
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetSection("JwtKey").ToString())),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
             });
 
         }
